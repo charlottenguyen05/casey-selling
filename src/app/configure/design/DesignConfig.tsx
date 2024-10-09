@@ -43,17 +43,14 @@ const DesignConfig = ({
   imageDimension,
 }: DesignConfigProps) => {
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
-
   const router = useRouter();
-  const [imageUploaded, setImageUploaded] = useState(false);
+  // const [startImageUploaded, setStartImageUploaded] = useState(false);
+  // const [endImageUploaded, setEndImageUploaded] = useState(false);
 
-  const { mutate: saveConfig } = useMutation({
+  const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["save-configuration"],
     mutationFn: async (args: updateConfigArgs) => {
-      await saveCanvasImage();
-      await updateConfigs(args);
-      setImageUploaded(true);
+      await Promise.all([saveCanvasImage(), updateConfigs(args)]);
     },
     onError: () => {
       toast({
@@ -64,7 +61,7 @@ const DesignConfig = ({
     },
     // !!onSuccess run before the image has been uploaded to uploadthing (Comback with this problems later)
     onSuccess: () => {
-      delay(() => router.push(`/configure/preview?id=${configId}`), 5000);
+      router.push(`/configure/preview?id=${configId}`);
     },
   });
 
@@ -119,32 +116,39 @@ const DesignConfig = ({
       userImage.src = imgUrl;
 
       // onload event handler is triggered when the userImage is finished loading
-      userImage.onload = () => {
-        // Draw user image on canvas
-        ctx?.drawImage(
-          userImage,
-          actualXInPhone,
-          actualYInPhone,
-          renderedDimension.width,
-          renderedDimension.height
-        );
+      await new Promise<void>((resolve, reject) => {
+        userImage.onload = () => {
+          ctx?.drawImage(
+            userImage,
+            actualXInPhone,
+            actualYInPhone,
+            renderedDimension.width,
+            renderedDimension.height
+          );
+          resolve();
+        };
+        userImage.onerror = reject;
+      });
 
-        // Convert canvas to a blob
-        canvas.toBlob(async (blob) => {
-          if (blob) {
-            // Create an image file from blob
-            const file = new File([blob], "new-crop.png", {
-              type: "image/png",
-            });
-            // Upload image file to uploadThing
-            await startUpload([file], {
-              configId: configId,
-            });
-            console.log("Upload successful image to uploadthing");
-            // setImageUploaded(true);
-          }
+      // Convert canvas to a blob and wait for it
+      const blob = await new Promise<Blob | null>((resolve) => {
+        canvas.toBlob((blob) => {
+          resolve(blob);
         }, "image/png");
-      };
+      });
+
+      if (blob) {
+        // Create an image file from blob
+        const file = new File([blob], "new-crop.png", {
+          type: "image/png",
+        });
+        // Upload image file to uploadThing
+        await startUpload([file], {
+          configId: configId,
+        });
+        console.log("Upload successful image to uploadthing");
+        // setEndImageUploaded(true);
+      }
     } catch (err) {
       toast({
         title: "Something went wrong",
@@ -361,8 +365,8 @@ const DesignConfig = ({
             <Button
               // Set isLoading = true when the image isn't fully uploaded to uploadthing
               // Set a state to control whether the image is uploaded to uploadthing
-              // isLoading={isImageUploaded}
-              // loadingText="Loading ..."
+              isLoading={isPending}
+              loadingText="Loading ..."
               className="w-full"
               onClick={() =>
                 saveConfig({
