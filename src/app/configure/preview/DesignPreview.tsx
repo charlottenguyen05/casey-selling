@@ -73,13 +73,17 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     },
   });
 
-  const handleCheckout = () => {
-    if (isAuthenticated) {
-      console.log("isAuthenticated:", isAuthenticated);
-      createPaymentSession({ configId: configId });
-    } else {
-      localStorage.setItem("configurationId", configId);
-      setIsLoginModalOpen(true);
+  const handleCheckout = async () => {
+    try {
+      if (isAuthenticated) {
+        console.log("isAuthenticated:", isAuthenticated);
+        await createPaymentSession({ configId: configId });
+      } else {
+        localStorage.setItem("configurationId", configId);
+        setIsLoginModalOpen(true);
+      }
+    } catch (error) {
+      console.error("Error during checkout:", error);
     }
   };
 
