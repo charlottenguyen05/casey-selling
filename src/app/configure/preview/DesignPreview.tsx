@@ -29,6 +29,7 @@ const Materials = [
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const { isAuthenticated } = useKindeBrowserClient();
+  console.log("isAuthenticated:", isAuthenticated);
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
