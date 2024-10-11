@@ -1,12 +1,14 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import ThankYou from "./ThankYou";
 
-const Page = async (searchParams: {
+interface SearchParams {
   [key: string]: string | undefined;
-}) => {
+}
+
+const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
   const { orderId } = searchParams;
   return (
-    <Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
       <ThankYou orderId={orderId} />
     </Suspense>
   );
