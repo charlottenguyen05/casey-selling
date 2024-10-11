@@ -11,6 +11,7 @@ const NavBar = async () => {
 
   const { getUser } = getKindeServerSession();
   let user = await getUser();
+  console.log("/NavBar.tsx: getKindeServerSession(): ", user);
   let isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   return (

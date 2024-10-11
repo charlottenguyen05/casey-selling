@@ -28,7 +28,7 @@ const Materials = [
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const { user } = useKindeBrowserClient();
+  const { isAuthenticated } = useKindeBrowserClient();
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
@@ -73,8 +73,8 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   });
 
   const handleCheckout = () => {
-    if (user) {
-      console.log(user);
+    if (isAuthenticated) {
+      console.log("isAuthenticated:", isAuthenticated);
       createPaymentSession({ configId: configId });
     } else {
       localStorage.setItem("configurationId", configId);
