@@ -16,5 +16,4 @@ export async function updateConfigs({ color, finish, material, model, configId }
             model
         }
     })
-
 }

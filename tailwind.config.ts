@@ -7,6 +7,14 @@ const config: Config = {
 		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
+	safelist:[
+		"bg-zinc-900",
+		"border-zinc-900",
+		"bg-blue-950",
+		"border-blue-950",
+		"bg-rose-950",
+		"border-rose-950",
+	],
 	theme: {
 		extend: {
 			backgroundImage: {

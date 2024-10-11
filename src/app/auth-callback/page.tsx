@@ -17,10 +17,12 @@ const Page = () => {
 
   const { data } = useQuery({
     queryKey: ["auth-callback"],
+    networkMode: "online",
     queryFn: async () => await getAuthStatus(),
-    retry: true,
+    retry: 10,
     retryDelay: 500,
   });
+  console.log(data)
 
   if (data?.success) {
     if (configId) {

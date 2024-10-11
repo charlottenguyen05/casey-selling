@@ -4,7 +4,7 @@ import NextImage from "next/image";
 import { cn, formatPrice } from "@/lib/utils";
 import { useRef, useState, useTransition } from "react";
 import { Rnd } from "react-rnd";
-import DotMarkResize from "../design/DotMarkResize";
+import DotMarkResize from "../../../components/DotMarkResize";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Description, Radio, RadioGroup } from "@headlessui/react";
 import {
@@ -366,7 +366,7 @@ const DesignConfig = ({
               // Set isLoading = true when the image isn't fully uploaded to uploadthing
               // Set a state to control whether the image is uploaded to uploadthing
               isLoading={isPending}
-              loadingText="Loading ..."
+              loadingText="Loading"
               className="w-full"
               onClick={() =>
                 saveConfig({

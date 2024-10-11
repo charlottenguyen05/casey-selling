@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Suspense } from "react";
+import ThankYou from "./ThankYou";
 
-const Page = () => {
+const Page = async (searchParams: {
+  [key: string]: string | undefined;
+}) => {
+  const { orderId } = searchParams;
   return (
-    <div>page</div>
-  )
-}
+    <Suspense>
+      <ThankYou orderId={orderId} />
+    </Suspense>
+  );
+};
 
-export default Page
+export default Page;
