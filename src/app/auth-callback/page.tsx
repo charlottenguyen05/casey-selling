@@ -19,7 +19,7 @@ const Page = () => {
     queryKey: ["auth-callback"],
     networkMode: "online",
     queryFn: async () => await getAuthStatus(),
-    retry: 3,
+    retry: 5,
     retryDelay: 500,
   });
   console.log(data)

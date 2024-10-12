@@ -5,18 +5,6 @@ import { stripe } from "@/lib/stripe"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { Order } from "@prisma/client"
 
-export const checkUser = async () => {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
-    return new Promise((resolve, reject) => {
-        if (user) {
-            resolve(user);
-        } else {
-            reject();
-        }
-    })
-}
-
 export const createCheckoutSession = async ({ configId }: { configId: string }) => {
     try {
         const configuration = await db.configuration.findUnique({

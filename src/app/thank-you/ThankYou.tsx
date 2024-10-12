@@ -12,7 +12,7 @@ const ThankYou = ({ orderId }: { orderId: string | undefined }) => {
   const { data, error } = useQuery({
     queryKey: ["get-payment-details"],
     queryFn: async () => await getPaymentDetails(orderId),
-    retry: 3,
+    retry: 10,
     retryDelay: 500,
   });
 
