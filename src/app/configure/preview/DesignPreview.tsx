@@ -7,7 +7,7 @@ import Confetti from "react-dom-confetti";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { createCheckoutSession } from "./actions";
+import { checkUser, createCheckoutSession } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
@@ -28,7 +28,10 @@ const Materials = [
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const { isAuthenticated } = useKindeBrowserClient();
+  let isAuthenticated = false;
+  checkUser()
+    .then(() => (isAuthenticated = true))
+    .catch(() => (isAuthenticated = false));
   console.log("isAuthenticated:", isAuthenticated);
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
@@ -73,11 +76,10 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     },
   });
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     try {
       if (isAuthenticated) {
-        console.log("isAuthenticated:", isAuthenticated);
-        await createPaymentSession({ configId: configId });
+        createPaymentSession({ configId: configId });
       } else {
         localStorage.setItem("configurationId", configId);
         setIsLoginModalOpen(true);

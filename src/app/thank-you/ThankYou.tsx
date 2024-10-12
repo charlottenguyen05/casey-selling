@@ -26,7 +26,7 @@ const ThankYou = ({ orderId }: { orderId: string | undefined }) => {
         description: error.message,
       });
     }
-  }, [error, toast]);
+  }, [error]);
 
   if (data === undefined) {
     return (
