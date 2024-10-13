@@ -22,14 +22,14 @@ export async function POST(req: Request) {
       return new Response('Invalid signature', { status: 400 })
     }
 
-    if (!process.env.STRIPE_WEBHOOK_SECRET) {
-      return new Response('Missing webhook secret', { status: 400 })
-    }
+    // if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    //   return new Response('Missing webhook secret', { status: 400 })
+    // }
     
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET
+      'whsec_oZhlOGlODDdVJpt3HMsFX6gjDGGZKYxR',
     )
 
     if (event.type === 'checkout.session.completed') {
