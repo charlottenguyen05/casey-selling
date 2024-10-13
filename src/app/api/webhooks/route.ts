@@ -7,9 +7,6 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { Resend } from 'resend'
 import Email from '@/components/emails/Email'
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -22,14 +19,14 @@ export async function POST(req: Request) {
       return new Response('Invalid signature', { status: 400 })
     }
 
-    // if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    //   return new Response('Missing webhook secret', { status: 400 })
-    // }
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      return new Response('Missing webhook secret', { status: 400 })
+    }
     
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
-      'whsec_oZhlOGlODDdVJpt3HMsFX6gjDGGZKYxR',
+      process.env.STRIPE_WEBHOOK_SECRET
     )
 
     if (event.type === 'checkout.session.completed') {
@@ -108,4 +105,3 @@ export async function POST(req: Request) {
     )
   }
 }
-

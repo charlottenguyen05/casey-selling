@@ -33,9 +33,6 @@ const Page = async ({ searchParams }: PageProps) => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user) { 
-    return notFound()
-  }
 
   const configuration = await db.configuration.findUnique({
     where: { id },

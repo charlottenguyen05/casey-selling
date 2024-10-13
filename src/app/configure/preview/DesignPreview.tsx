@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
+import LoginModal from "@/components/LoginModal";
 
 const Highlights = [
   "Wireless charging compatible",
@@ -33,9 +34,10 @@ const DesignPreview = ({
 }) => {
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
-
+  
   const router = useRouter();
   const { toast } = useToast();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
 
   const {
     material,
@@ -74,12 +76,15 @@ const DesignPreview = ({
   });
 
   const handleCheckout = () => {
-    try {
-      createPaymentSession({ configId: configId, user });
-    } catch (error) {
-      console.error("Error during checkout:", error);
+    if (user) {
+      // create payment session
+      createPaymentSession({ configId: configId, user })
+    } else {
+      // need to log in
+      localStorage.setItem('configurationId', configId)
+      setIsLoginModalOpen(true)
     }
-  };
+  }
 
   return (
     <>
@@ -87,8 +92,9 @@ const DesignPreview = ({
         active={showConfetti}
         config={{ elementCount: 200, spread: 120 }}
       />
+      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <section className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-14 my-20">
-        <div className="phone-section flex justify-center items-center md:justify-start ">
+        <div className="phone-section flex justify-center items-center md:justify-start">
           <Phone
             imgSrc={croppedImgUrl!}
             className={cn(

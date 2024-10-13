@@ -2,7 +2,7 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import NextImage from "next/image";
 import { cn, formatPrice } from "@/lib/utils";
-import { useRef, useState, useTransition } from "react";
+import { useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import DotMarkResize from "../../../components/DotMarkResize";
 import { ScrollArea } from "@/components/ui/scroll-area";

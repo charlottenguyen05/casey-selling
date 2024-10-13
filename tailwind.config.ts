@@ -8,8 +8,8 @@ const config: Config = {
 		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	safelist:[
-		"bg-zinc-900",
-		"border-zinc-900",
+		"bg-zinc-950",
+		"border-zinc-950",
 		"bg-blue-950",
 		"border-blue-950",
 		"bg-rose-950",

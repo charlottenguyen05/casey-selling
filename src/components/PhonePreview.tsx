@@ -58,6 +58,7 @@ const PhonePreview = ({
           src="/clearphone.png"
           alt="background"
           className="pointer-events-none h-full w-full antialiased rounded-md"
+          fill
         />
       </div>
     </AspectRatio>
