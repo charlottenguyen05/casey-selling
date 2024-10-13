@@ -29,6 +29,7 @@
     "canvas": "^3.0.0-rc2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "^11.5.4",
     "fs": "^0.0.1-security",
     "lucide-react": "^0.438.0",
