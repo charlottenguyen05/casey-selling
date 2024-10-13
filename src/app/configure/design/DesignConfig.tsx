@@ -29,7 +29,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { updateConfigArgs, updateConfigs } from "../design/actions";
 import { useRouter } from "next/navigation";
-import { delay } from "framer-motion";
 import LoginModal from "@/components/LoginModal";
 
 interface DesignConfigProps {

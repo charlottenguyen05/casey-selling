@@ -11,8 +11,6 @@ import { createCheckoutSession } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import LoginModal from "@/components/LoginModal";
 
 const Highlights = [
   "Wireless charging compatible",

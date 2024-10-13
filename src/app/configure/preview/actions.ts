@@ -14,6 +14,8 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
         if (!configuration) {
             throw new Error("Configuration not found");
         }
+        
+        const { finish, material } = configuration;
 
         const { getUser } = getKindeServerSession();
         const user = await getUser();
@@ -22,7 +24,12 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
             throw new Error("You need to be logged in to checkout");
         }
 
-        const { finish, material } = configuration;
+        const existingOrder = await db.order.findFirst({
+            where: {
+                userId: user.id,
+                configurationId: configId
+            }
+        });
 
         let price = BASE_PRICE;
         if (material === "polycarbonate") {
@@ -33,13 +40,6 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
         }
 
         let order: Order | undefined = undefined;
-
-        const existingOrder = await db.order.findFirst({
-            where: {
-                userId: user.id,
-                configurationId: configId
-            }
-        });
 
         console.log("Creating checkout session", user.id, configuration.id);
 

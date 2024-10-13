@@ -7,7 +7,7 @@ export const getAuthStatus = async () => {
     try {
         const { getUser } = getKindeServerSession();
         const user = await getUser();
-        console.log(user)
+        console.log("Auth-callback", user)
 
         if (!user?.id || !user?.email) {
             throw new Error("User not found");
