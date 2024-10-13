@@ -25,7 +25,7 @@ export const createCheckoutSession = async ({ configId, user }: { configId: stri
         const existingOrder = await db.order.findFirst({
             where: {
                 userId: user.id,
-                configurationId: configId
+                configurationId: configuration.id
             }
         });
 
@@ -48,7 +48,7 @@ export const createCheckoutSession = async ({ configId, user }: { configId: stri
                 data: {
                     userId: user.id,
                     totalPrice: price / 100,
-                    configurationId: configuration.id
+                    configurationId: configuration.id,
                 }
             });
         }
