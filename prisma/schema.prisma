@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 // prisma/schema.prisma
@@ -60,7 +61,7 @@ model Configuration {
 }
 
 model User {
-  id        String   @id 
+  id        String   @id
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -79,10 +80,10 @@ model Order {
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
 
-  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
   shippingAddressId String?
-  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
   billingAddressId  String?
+  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
 }
 
 model ShippingAddress {
