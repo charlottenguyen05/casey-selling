@@ -11,6 +11,7 @@ import { createCheckoutSession } from "./actions";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 
 const Highlights = [
   "Wireless charging compatible",
@@ -25,9 +26,10 @@ const Materials = [
 ];
 
 const DesignPreview = ({
-  configuration,
+  configuration, user
 }: {
-  configuration: Configuration;
+  configuration: Configuration,
+  user: KindeUser<Record<string, any>>,
 }) => {
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
@@ -73,7 +75,7 @@ const DesignPreview = ({
 
   const handleCheckout = () => {
     try {
-      createPaymentSession({ configId: configId });
+      createPaymentSession({ configId: configId, user });
     } catch (error) {
       console.error("Error during checkout:", error);
     }

@@ -3,9 +3,10 @@ import { BASE_PRICE, PRODUCT_PRICES } from "@/config/product"
 import { db } from "@/db"
 import { stripe } from "@/lib/stripe"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { Order } from "@prisma/client"
 
-export const createCheckoutSession = async ({ configId }: { configId: string }) => {
+export const createCheckoutSession = async ({ configId, user }: { configId: string, user: KindeUser<Record<string, any>>, }) => {
     try {
         const configuration = await db.configuration.findUnique({
             where: { id: configId }
@@ -14,11 +15,8 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
         if (!configuration) {
             throw new Error("Configuration not found");
         }
-        
-        const { finish, material } = configuration;
 
-        const { getUser } = getKindeServerSession();
-        const user = await getUser();
+        const { finish, material } = configuration;
 
         if (!user) {
             throw new Error("You need to be logged in to checkout");
@@ -55,6 +53,8 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
             });
         }
 
+        console.log("Order created", order.id);
+
         const product = await stripe.products.create({
             name: "Custom Phone Case",
             description: "Custom phone case",
@@ -64,6 +64,7 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
                 unit_amount: price,
             }
         });
+        console.log("product created");
 
         // Create a checkout session
         const checkoutSession = await stripe.checkout.sessions.create({
@@ -82,6 +83,7 @@ export const createCheckoutSession = async ({ configId }: { configId: string }) 
             success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/thank-you?order_id=${order.id}`,
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/configure/preview?id=${configId}`,
         });
+        console.log("Finished creating checkout session", checkoutSession.id);
 
         return { url: checkoutSession.url };
     } catch (error) {
