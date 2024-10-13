@@ -4,6 +4,7 @@ import { buttonVariants } from "./ui/button";
 import {
   RegisterLink,
   LoginLink,
+  LogoutLink
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
@@ -18,12 +19,12 @@ const NavBar = async () => {
     <nav className="sticky z-[100] top-0 bg-white/75 backdrop-blur-lg transition-all h-14 border-b border-gray-200">
       <MaxWidthWrapper className="flex justify-between items-center gap-2">
         <Link className="font-semibold" href="/">
-          case<span className="text-green-600">cobra</span>
+          casey <span className="text-green-600">selling</span>
         </Link>
         <div className="flex gap-4 items-center text-xs font-semibold">
           {user ? (
             <>
-              <Link
+              <LogoutLink
                 href="/api/auth/logout"
                 className={buttonVariants({
                   size: "sm",
@@ -32,7 +33,7 @@ const NavBar = async () => {
                 })}
               >
                 Sign out
-              </Link>
+              </LogoutLink>
               {isAdmin ? (
                 <Link
                   href="/api/dashboard"

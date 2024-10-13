@@ -7,7 +7,10 @@ import {
   DialogContent,
 } from "./ui/dialog";
 import Image from "next/image";
-import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
+import {
+  LoginLink,
+  RegisterLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 import { buttonVariants } from "./ui/button";
 
 const LoginModal = ({
@@ -36,7 +39,6 @@ const LoginModal = ({
             <span className="font-sm text-zinc-600">
               Your configuration was saved!
             </span>
-        
           </DialogDescription>
         </DialogHeader>
 
