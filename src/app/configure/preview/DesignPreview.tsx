@@ -26,7 +26,7 @@ const Materials = [
   "Scratch and fingerprint resistant coating",
 ];
 
-const DesignPreview = async ({
+const DesignPreview = ({
   configuration,
 }: {
   configuration: Configuration;
