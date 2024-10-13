@@ -6,10 +6,10 @@ interface SearchParams {
 }
 
 const Page = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const { orderId } = searchParams;
+  const { order_id } = searchParams;
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ThankYou orderId={orderId} />
+      <ThankYou orderId={order_id} />
     </Suspense>
   );
 };

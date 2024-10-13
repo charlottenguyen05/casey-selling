@@ -29,6 +29,7 @@ export const getPaymentDetails = async (orderId: string | undefined) => {
     }
 
     if (order.isPaid) {
+        console.log(order)
         return order;
     } else {
         return false;
