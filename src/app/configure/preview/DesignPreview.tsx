@@ -31,7 +31,6 @@ const DesignPreview = ({
 }: {
   configuration: Configuration;
 }) => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
 
@@ -76,8 +75,7 @@ const DesignPreview = ({
 
   const handleCheckout = () => {
     try {
-      localStorage.setItem("configurationId", configId);
-      setIsLoginModalOpen(true);
+      createPaymentSession({ configId: configId });
     } catch (error) {
       console.error("Error during checkout:", error);
     }
@@ -89,7 +87,6 @@ const DesignPreview = ({
         active={showConfetti}
         config={{ elementCount: 200, spread: 120 }}
       />
-      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <section className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-14 my-20">
         <div className="phone-section flex justify-center items-center md:justify-start ">
           <Phone

@@ -8,6 +8,7 @@ import {
   CaseMaterial,
   PhoneModel,
 } from "@prisma/client";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface PageProps {
   searchParams: {
@@ -27,6 +28,13 @@ const Page = async ({ searchParams }: PageProps) => {
   const { id } = searchParams;
   if (!id || typeof id !== "string") {
     return notFound();
+  }
+
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) { 
+    return notFound()
   }
 
   const configuration = await db.configuration.findUnique({
