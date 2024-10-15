@@ -15,9 +15,9 @@ const guarenteesEnd = [
 
 const UploadFirstPage = () => {
   return (
-    <section className="bg-slate-50">
+    <section className="bg-slate-50 dark:bg-slate-900/30">
       <MaxWidthWrapper className="flex flex-col gap-10 px-6 py-24">
-        <h2 className="mx-auto sm:text-center tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-gray-900">
+        <h2 className="mx-auto sm:text-center tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl dark:text-white text-gray-900">
           Upload your photo and get{" "}
           <span className="px-2 bg-green-600 text-white">your own case</span>{" "}
           now
@@ -48,7 +48,7 @@ const UploadFirstPage = () => {
         </div>
         <div className="flex justify-center">
           <Link href="/configure/upload">
-            <Button className="bg-green-600 hover:cursor-pointer hover:bg-green-600/85 px-8">
+            <Button className="bg-green-600 hover:cursor-pointer dark:text-white hover:bg-green-600/85 px-8">
               Create your case now &rarr;
             </Button>
           </Link>

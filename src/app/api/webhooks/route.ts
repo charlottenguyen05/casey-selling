@@ -79,7 +79,7 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: "Casey Selling <nhinguyenngoclinh2005@gmail.com>",
         to: [event.data.object.customer_details.email],
-        subject: "Thank for your order!",
+        subject: "Thanks for your order!",
         react: Email({
             orderId,
             orderDate: updatedOrder.createdAt.toLocaleDateString(),

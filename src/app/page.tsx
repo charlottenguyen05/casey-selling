@@ -6,7 +6,7 @@ import Reviews from "@/components/Reviews";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <Hero/>
       <Testimonials />
       <Reviews /> 
       <UploadFirstPage />

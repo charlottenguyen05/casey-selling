@@ -32,11 +32,11 @@ const LoginModal = ({
               fill
             />
           </div>
-          <DialogTitle className="text-2xl text-center tracking-tight text-gray-900 font-bold">
+          <DialogTitle className="text-2xl text-center tracking-tight dark:text-white text-gray-900 font-bold">
             Log in or sign up to continue
           </DialogTitle>
           <DialogDescription className="text-base text-center py-2">
-            <span className="font-sm text-zinc-600">
+            <span className="font-sm text-zinc-600 dark:text-white">
               Your configuration was saved!
             </span>
           </DialogDescription>

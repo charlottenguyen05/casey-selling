@@ -45,7 +45,7 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
   return (
     <div
       className={cn(
-        "animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5",
+        "animate-fade-in rounded-[2.25rem] dark:bg-slate-900 dark:shadow-slate-800 bg-white p-6 shadow-xl shadow-slate-900/5",
         className
       )}
       style={{ animationDelay }}
@@ -147,15 +147,15 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className="pointer-events-none absolute inset-x-0 -top-1 h-32 bg-gradient-to-b from-slate-100" />
-      <div className="pointer-events-none absolute inset-x-0 -bottom-1 h-32 bg-gradient-to-t from-slate-100" />
+      <div className="pointer-events-none absolute inset-x-0 -top-1 h-32 bg-gradient-to-b from-slate-100 dark:from-slate-800" />
+      <div className="pointer-events-none absolute inset-x-0 -bottom-1 h-32 bg-gradient-to-t from-slate-100 dark:from-slate-800" />
     </div>
   );
 }
 
 function Reviews() {
   return (
-    <section className="pt-8 pb-24 grainy-dark bg-slate-100">
+    <section className="pt-8 pb-24 grainy-dark dark:bg-slate-900/30 bg-slate-100">
       <MaxWidthWrapper className="relative max-w-5xl px-10">
         <Image
           width={180}
@@ -163,7 +163,7 @@ function Reviews() {
           alt="What people are buying"
           aria-hidden="true"
           src="/what-people-are-buying.png"
-          className="absolute select-none hidden xl:block -left-36 top-1/3"
+          className="absolute select-none hidden xl:block -left-36 top-1/3 dark:hidden"
         />
 
         <ReviewGrid />

@@ -118,17 +118,17 @@ const DesignPreview = ({
 
           {/* Highlights & Materials Section */}
           <div className="flex flex-col sm:flex-row my-3 gap-8 lg:gap-20 max-sm:items-center max-sm:justify-center">
-            <div>
-              <p className="font-medium text-zinc-950">Highlights</p>
-              <ul className="mt-2 text-zinc-700 list-disc list-inside">
+            <div className="dark:text-white">
+              <p className="font-medium text-zinc-950 dark:text-white">Highlights</p>
+              <ul className="mt-2 text-zinc-700 dark:text-white list-disc list-inside">
                 {Highlights.map((highlight, i) => (
                   <li key={i}>{highlight}</li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="font-medium text-zinc-950">Materials</p>
-              <ul className="mt-2 text-zinc-700 list-disc list-inside">
+              <p className="font-medium text-zinc-950 dark:text-white">Materials</p>
+              <ul className="mt-2 text-zinc-700 dark:text-white list-disc list-inside">
                 {Materials.map((material, i) => (
                   <li key={i}>{material}</li>
                 ))}
@@ -141,30 +141,30 @@ const DesignPreview = ({
           <div className="table-price bg-secondary/25 p-6 sm:rounded-lg sm:p-8 mt-8 w-full">
             <div className="grid grid-cols-2">
               {/* Name of options */}
-              <div className="flex flex-col items-start gap-2">
-                <p className="text-gray-600">Base price</p>
-                <p className="text-gray-600">
+              <div className="flex flex-col items-start gap-2 ">
+                <p className="text-gray-600 dark:text-white">Base price</p>
+                <p className="text-gray-600 dark:text-white">
                   {material === "polycarbonate"
                     ? "Soft polycarbonate material"
                     : "Silicone material"}
                 </p>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-white">
                   {finish === "textured" ? "Textured finish" : "Smooth finish"}
                 </p>
               </div>
 
               {/* Price for options */}
               <div className="flex flex-col items-end gap-2">
-                <p className="font-medium text-gray-900">
+                <p className="font-medium text-gray-900 dark:text-white">
                   {formatPrice(BASE_PRICE / 100)}
                 </p>
-                <p className="font-medium text-gray-900">
+                <p className="font-medium text-gray-900 dark:text-white">
                   {material === "polycarbonate"
                     ? formatPrice(PRODUCT_PRICES.material.polycarbonate / 100)
                     : "Free"}
                 </p>
 
-                <p className="font-medium text-gray-900">
+                <p className="font-medium text-gray-900 dark:text-white">
                   {finish === "textured"
                     ? formatPrice(PRODUCT_PRICES.finish.textured / 100)
                     : "Free"}
@@ -172,8 +172,8 @@ const DesignPreview = ({
               </div>
               <hr className="col-span-2 my-4" />
               <div className="flex justify-between col-span-2">
-                <p className="text-gray-600 font-semibold">Total</p>
-                <p className="font-semibold text-gray-900">
+                <p className="text-gray-600 font-semibold dark:text-white">Total</p>
+                <p className="font-semibold text-gray-900 dark:text-white">
                   {formatPrice(totalPrice / 100)}
                 </p>
               </div>
@@ -182,7 +182,7 @@ const DesignPreview = ({
 
           <Button
             onClick={() => handleCheckout()}
-            className="mt-6 px-4 sm:px-6 lg:px-8 py-2 rounded-lg flex self-end"
+            className="mt-6 dark:text-white px-4 sm:px-6 lg:px-8 py-2 rounded-lg flex self-end"
           >
             Check out <span className="ml-1.5 font-bold">➞</span>
           </Button>

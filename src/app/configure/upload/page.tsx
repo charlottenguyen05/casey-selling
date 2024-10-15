@@ -11,16 +11,16 @@ import Dropzone, { FileRejection } from "react-dropzone";
 import Steps from "@/components/Steps";
 
 const Page = () => {
-  const { toast } = useToast();  // For notification if file type is not supported
-  const [isDragOver, setIsDragOver] = useState<boolean>(false);   // For drag and drop effect
-  const [isPending, startTransition] = useTransition();  // For loading effect
+  const { toast } = useToast(); // For notification if file type is not supported
+  const [isDragOver, setIsDragOver] = useState<boolean>(false); // For drag and drop effect
+  const [isPending, startTransition] = useTransition(); // For loading effect
   const [uploadProgress, setUploadProgress] = useState(0);
   const router = useRouter();
 
   const { startUpload, isUploading } = useUploadThing("imageUploader", {
     // Update the loading bar and redirect to design page after uploading
     onClientUploadComplete: (data) => {
-      const configId = data[0].serverData.configId; 
+      const configId = data[0].serverData.configId;
       console.log("configId", configId);
       startTransition(() => {
         router.push(`/configure/design?id=${configId}`);
@@ -52,7 +52,7 @@ const Page = () => {
     // Return only drag and drop area
     <div
       className={cn(
-        "relative h-full flex-1 my-10 w-full rounded-xl bg-gray-900/5 p-2 ring-2 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center",
+        "relative h-full flex-1 my-10 w-full rounded-xl bg-gray-900/5 p-2 ring-2 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center dark:bg-slate-800 dark:ring-inset dark:ring-2 dark:ring-slate-500",
         {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
         }
@@ -77,14 +77,14 @@ const Page = () => {
               {...getRootProps()}
             >
               {/* getInputProps: Spread necessary props and event handlers from react-dropzone (type, accept, name, etc.) */}
-              <input {...getInputProps()} /> 
-              
+              <input {...getInputProps()} />
+
               {isDragOver ? (
                 <MousePointerSquareDashed className="size-6 text-zinc-500 mb-2" />
               ) : isPending || isUploading ? (
                 <Loader2 className="size-6 animate-spin text-zinc-500 mb-2" />
               ) : (
-                <Image className="size-6 text-zinc-500 mb-2"/>
+                <Image className="size-6 text-zinc-500 mb-2" />
               )}
               {isDragOver ? (
                 <>

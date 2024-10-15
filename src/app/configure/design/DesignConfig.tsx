@@ -170,7 +170,7 @@ const DesignConfig = ({
             <AspectRatio ref={phoneCaseRef} ratio={896 / 1831} className="z-50">
               <NextImage src="/phone-template.png" alt="phone" fill />
             </AspectRatio>
-            <div className="absolute z-40 inset-0 left-[3px] right-[3px] rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)]" />
+            <div className="absolute z-40 inset-0 left-[3px] right-[3px] rounded-[32px] shadow-[0_0_0_99999px_rgba(229,231,235,0.6)] dark:shadow-[0_0_0_99999px_rgba(51,65,85,0.8)]" />
             <div
               className={cn(
                 "absolute inset-0 left-[3px] right-[3px] rounded-[32px]",
@@ -223,9 +223,9 @@ const DesignConfig = ({
         </div>
 
         {/* Section: Customize the case */}
-        <div className="case-options h-[37.5rem] flex flex-col bg-white col-span-3 lg:col-span-1 pt-6 sm:pt-0">
+        <div className="case-options h-[37.5rem] flex flex-col bg-white dark:bg-slate-800 col-span-3 lg:col-span-1 pt-6 sm:pt-0">
           <ScrollArea className="relative flex-1 overflow-auto">
-            <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white z-10 pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white dark:bg-none z-10 pointer-events-none" />
             <div className="px-8 pb-12 pt-6">
               <h2 className="text-3xl font-bold tracking-tight">
                 Customize your case
@@ -247,7 +247,7 @@ const DesignConfig = ({
                         className={cn(
                           "relative -m-1.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 active:ring-0 focus:ring-0 active:outline-none focus:outline-none border-2 border-transparent",
                           {
-                            [`border-${color.tw}`]:
+                            [`border-${color.tw} dark:border-slate-400`]:
                               options.color.value === color.value,
                           }
                         )}
@@ -255,7 +255,7 @@ const DesignConfig = ({
                         <span
                           className={cn(
                             `bg-${color.tw}`,
-                            "size-8 rounded-full border border-black border-opacity-10"
+                            "size-8 rounded-full border dark:border-slate-400 dark:hover:border-white dark:border-2 border-black border-opacity-10"
                           )}
                         />
                       </Radio>
@@ -270,7 +270,7 @@ const DesignConfig = ({
                       <Button
                         variant="outline"
                         role="combobox"
-                        className="w-full justify-between after-focus:ring-0"
+                        className="w-full justify-between dark:bg-slate-700/80 after-focus:ring-0"
                       >
                         {options.model.label}
                         <ChevronDown className="size-6 ml-2 shrink-0 opacity-50" />
@@ -284,9 +284,9 @@ const DesignConfig = ({
                             setOptions((prev) => ({ ...prev, model }))
                           }
                           className={cn(
-                            "flex text-sm items-center p-1.5 cursor-default hover:bg-zinc-100",
+                            "flex text-sm items-center p-1.5 cursor-default dark:hover:bg-slate-700 hover:bg-zinc-100",
                             {
-                              "bg-zinc-100":
+                              "bg-zinc-100 dark:bg-slate-700":
                                 options.model.value === model.value,
                             }
                           )}
@@ -314,7 +314,6 @@ const DesignConfig = ({
                         [`${choice.name}`]: newVal,
                       }))
                     }
-                    className={cn()}
                   >
                     {choice.name === "material" ? (
                       <Label>Material</Label>
@@ -327,24 +326,24 @@ const DesignConfig = ({
                           key={option.value}
                           value={option}
                           className={cn(
-                            "relative block w-full cursor-pointer rounded-lg px-6 py-4 shadow-sm border-2 border-zinc-200 focus:outline-none ring-0 focus:ring-0 outline-none sm:flex sm:justify-between",
+                            "relative block w-full cursor-pointer rounded-lg px-6 py-4 shadow-sm border-2 dark:border-slate-400 border-zinc-200 focus:outline-none ring-0 focus:ring-0 outline-none sm:flex sm:justify-between",
                             {
-                              "border-primary":
+                              "border-primary dark:border-slate-100 dark:bg-slate-700/80":
                                 options[choice.name].value === option.value,
                             }
                           )}
                         >
                           <span className="flex flex-col text-sm">
-                            <Label className="font-medium text-gray-900">
+                            <Label className="font-medium text-gray-900 dark:text-white">
                               {option.label}
                             </Label>
                             {option.description && (
-                              <Description className="block sm:inline text-gray-500 mt-1">
+                              <Description className="block sm:inline dark:text-slate-300 text-gray-500 mt-1">
                                 {option.description}
                               </Description>
                             )}
                           </span>
-                          <Description className="text-gray-900 mt-2 flex text-sm sm:ml-4 sm:mt-0 leading-none sm:text-right font-medium">
+                          <Description className="text-gray-900 dark:text-white mt-2 flex text-sm sm:ml-4 sm:mt-0 leading-none sm:text-right font-medium">
                             {option.price === 0
                               ? "Free"
                               : `${formatPrice(option.price / 100)}`}
@@ -360,7 +359,7 @@ const DesignConfig = ({
           <hr className="mx-8 mb-6" />
 
           {/* Section: Total price and submit button */}
-          <div className="flex flex-row flex-nowrap justify-between w-full px-8 gap-6">
+          <div className="flex flex-row flex-nowrap justify-between w-full px-8 gap-6 pb-6">
             <span className="whitespace-nowrap my-2 font-medium">
               {formatPrice(
                 (BASE_PRICE + options.material.price + options.finish.price) /
@@ -373,7 +372,7 @@ const DesignConfig = ({
                 // Set a state to control whether the image is uploaded to uploadthing
                 isLoading={isPending}
                 loadingText="Loading"
-                className="w-full"
+                className="w-full dark:text-white "
                 onClick={() =>
                   saveConfig({
                     color: options.color.value,

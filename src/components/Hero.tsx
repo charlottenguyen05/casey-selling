@@ -3,6 +3,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import FiveStar from "@/components/FiveStar";
 import Guarentee from "@/components/Guarentee";
 import Phone from "@/components/Phone";
+import { useTheme } from "next-themes";
 
 const Guarentees = [
   "High-quality, durable material",
@@ -12,13 +13,13 @@ const Guarentees = [
 
 const Hero = () => {
   return (
-    <section className="bg-slate-50">
+    <section className="bg-slate-50 dark:bg-slate-900/30">
       <MaxWidthWrapper className="pb-24 sm:pb-32 lg:pb-52 lg:pt-24 xl:pt-32 grid grid-cols-1 lg:grid-cols-3 lg:gap-x-0 xl:gap-x-8">
         <div className="lg:col-span-2 px-6 lg:px-0 lg:pt-4">
           <div className="relative flex flex-col items-center mx-auto text-center lg:text-left lg:items-start">
             {/* Snake image only appear in lg screen */}
             <div className="absolute hidden lg:block w-28 left-0 -top-20">
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t via-slate-50/50 from-slate-50 h-28" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t via-slate-50/50 from-slate-50 h-28 dark:from-slate-900/30" />
               <Image
                 src="/snake-1.png"
                 width={400}
@@ -29,7 +30,7 @@ const Hero = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="relative tracking-tight text-balance !leading-tight w-fit mt-16 font-bold text-gray-900 text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="relative tracking-tight text-balance !leading-tight w-fit mt-16 font-bold dark:text-slate-200 text-gray-900 text-5xl md:text-6xl lg:text-7xl">
               Your Image on a{" "}
               <span className="text-white bg-green-600 px-2">Custom</span> Phone
               Case
@@ -106,7 +107,7 @@ const Hero = () => {
               width={160}
               height={160}
               alt="your image text"
-              className="absolute hidden select-none left-56 -top-20 sm:block lg:hidden lg:w-52 xl:block "
+              className="absolute hidden select-none left-56 -top-20 sm:block lg:hidden lg:w-52 xl:block dark:hidden"
             />
             <Image
               src="/line.png"

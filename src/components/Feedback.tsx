@@ -12,7 +12,7 @@ const FeedBack = ({
   name: string;
 }) => {
   return (
-    <div className="flex flex-col gap-4 mx-auto px-4">
+    <div className="dark:bg-slate-900 flex flex-col gap-4 mx-auto px-4">
       <FiveStar className="size-5 mb-2" />
       <p className="text-lg leading-8">{feedbackText}</p>
       <div className="flex flex-row justify-start gap-4">
@@ -27,7 +27,7 @@ const FeedBack = ({
           <div className="font-semibold">{name}</div>
           <span>
             <Check className="size-5 text-green-600 inline-block" />
-            <span className="text-sm text-zinc-600"> Verified Purchase</span>
+            <span className="text-sm text-zinc-600 dark:text-zinc-200"> Verified Purchase</span>
           </span>
         </div>
       </div>

@@ -28,14 +28,14 @@ const STEPS = [
 const Steps = () => {
   let pathname = usePathname();
   return (
-    <ol className="rounded-md bg-white shadow-lg pt-1 lg:flex lg:rounded-none lg:border-1 lg:border-x lg:border-gray-200 mt-8 lg:mt-16">
+    <ol className="dark:bg-slate-800/40 dark:border-slate-500  dark:text-white rounded-md bg-white shadow-lg pt-1 lg:flex lg:rounded-none lg:border-1 lg:border-x lg:border-gray-200 mt-8 lg:mt-16">
       {STEPS.map((step, i) => {
         let isCurrent = pathname.includes(step.url);
         return (
           <li className="relative overflow-hidden lg:flex-1" key={i}>
             <span
               className={`absolute left-0 top-0 right-auto h-full w-1 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full ${
-                isCurrent ? "bg-green-600" : "bg-slate-200"
+                isCurrent ? "bg-green-600" : "bg-slate-200 dark:bg-slate-500"
               }`}
             ></span>
             <div className="flex items-center px-6 py-4 text-sm font-medium">
@@ -60,7 +60,7 @@ const Steps = () => {
                 })}
               >
                 <svg
-                  className="h-auto w-auto text-gray-300"
+                  className="h-auto w-auto text-gray-300 dark:text-slate-500"
                   viewBox="0 0 12 82"
                   fill="none"
                   preserveAspectRatio="none"

@@ -1,13 +1,30 @@
+"use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { HTMLAttributes } from "react";
+import { useState, useEffect, HTMLAttributes } from "react";
 
 interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
   imgSrc: string;
   dark?: boolean;
 }
 
-const Phone = ({ imgSrc, dark = false, className, ...props }: PhoneProps) => {
+const getCurrentTheme = () => {
+  if (typeof window !== "undefined") {
+    return document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  }
+  return "light";
+};
+
+const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    const currentTheme = getCurrentTheme();
+    if (theme !== currentTheme) {
+      setTheme(currentTheme);
+    }
+  }, []);
   return (
     <div
       className={cn(
@@ -18,7 +35,7 @@ const Phone = ({ imgSrc, dark = false, className, ...props }: PhoneProps) => {
     >
       <Image
         src={
-          dark
+          theme === "dark"
             ? "/phone-template-dark-edges.png"
             : "/phone-template-white-edges.png"
         }
@@ -33,7 +50,7 @@ const Phone = ({ imgSrc, dark = false, className, ...props }: PhoneProps) => {
           height={400}
           src={imgSrc}
           alt="overlaying image on phone"
-          className="object-cover min-w-full min-h-full"
+          className="object-cover max-w-full min-h-full"
         />
       </div>
     </div>

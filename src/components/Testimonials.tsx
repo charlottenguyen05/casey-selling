@@ -19,10 +19,10 @@ const feedbacks = [
 
 const Testimonials = () => {
   return (
-    <section className="bg-slate-100 grainy-dark py-24">
+    <section className="dark:bg-slate-900 bg-slate-100 grainy-dark py-24">
       <MaxWidthWrapper>
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6">
-          <h2 className="font-bold tracking-tight text-balance !leading-tight text-center md:text-6xl text-gray-900 text-5xl max-lg:order-last">
+          <h2 className="font-bold tracking-tight text-balance !leading-tight text-center md:text-6xl text-gray-900 dark:text-white text-5xl max-lg:order-last">
             What our <span className="relative px-2">customers</span> say
           </h2>
           <Image src="/snake-2.png" alt="snake" width={96} height={96} />
