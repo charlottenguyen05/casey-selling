@@ -3,7 +3,6 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import FiveStar from "@/components/FiveStar";
 import Guarentee from "@/components/Guarentee";
 import Phone from "@/components/Phone";
-import { useTheme } from "next-themes";
 
 const Guarentees = [
   "High-quality, durable material",

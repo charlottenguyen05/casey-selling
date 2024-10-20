@@ -57,33 +57,21 @@ model Configuration {
   finish        CaseFinish?
   material      CaseMaterial?
   croppedImgUrl String?
-  order         Order[]
+  orderId       String?
+  order         Order?        @relation(fields: [orderId], references: [id])
+  CartItem      CartItem?
+  userId        String?       @unique
+  user          User?         @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id        String   @id
-  email     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Order     Order[]
-}
-
-model Order {
-  id              String        @id @default(cuid())
-  configurationId String        @unique
-  configuration   Configuration @relation(fields: [configurationId], references: [id])
-  userId          String
-  user            User          @relation(fields: [userId], references: [id])
-  totalPrice      Float
-  isPaid          Boolean       @default(false)
-  status          OrderStatus   @default(awaiting_shipment)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-
-  shippingAddressId String?
-  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id])
-  billingAddressId  String?
-  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
+  id            String          @id
+  email         String          @unique
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  Order         Order[]
+  ShoppingCart  ShoppingCart?
+  Configuration Configuration[]
 }
 
 model ShippingAddress {
@@ -106,4 +94,44 @@ model BillingAddress {
   country    String
   phone      String?
   orders     Order[]
+}
+
+model ShoppingCart {
+  id        String     @id @default(cuid())
+  userId    String?    @unique
+  user      User?      @relation(fields: [userId], references: [id])
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+  order     Order?
+}
+
+model CartItem {
+  id              String        @id @default(cuid())
+  name            String?
+  singlePrice     Float
+  configurationId String        @unique
+  configuration   Configuration @relation(fields: [configurationId], references: [id])
+  quantity        Int
+  shoppingCartId  String
+  shoppingCart    ShoppingCart  @relation(fields: [shoppingCartId], references: [id])
+}
+
+model Order {
+  id             String       @id @default(cuid())
+  shoppingCartId String       @unique
+  shoppingCart   ShoppingCart @relation(fields: [shoppingCartId], references: [id])
+  userId         String
+  user           User         @relation(fields: [userId], references: [id])
+  totalPrice     Float
+  isPaid         Boolean      @default(false)
+  status         OrderStatus  @default(awaiting_shipment)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  shippingAddressId String?
+  shippingAddress   ShippingAddress? @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  billingAddressId  String?
+  billingAddress    BillingAddress?  @relation(fields: [billingAddressId], references: [id])
+  Configuration     Configuration[]
 }

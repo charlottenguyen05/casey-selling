@@ -8,6 +8,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import ThemeToggle from "./ThemeToggle";
+import { ShoppingCart } from "lucide-react";
 
 const NavBar = async () => {
 
@@ -48,6 +49,7 @@ const NavBar = async () => {
                   Dashboard ✨
                 </Link>
               ) : (
+                <>
                 <Link
                   href="/configure/upload"
                   className={buttonVariants({
@@ -57,6 +59,16 @@ const NavBar = async () => {
                 >
                   Create case <span className="font-bold ml-2">&#10148;</span>
                 </Link>
+                <Link
+                  href="/cart"
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                    className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                  })}>
+                    <ShoppingCart className="size-6" />
+                  </Link>
+                </>
               )}
             </>
           ) : (
@@ -91,6 +103,15 @@ const NavBar = async () => {
                 >
                   Create case <span className="font-bold ml-2">&#10148;</span>
                 </Link>
+                <Link
+                  href="/cart"
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                    className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                  })}>
+                    <ShoppingCart className="size-6" />
+                  </Link>
               </div>
             </>
           )}

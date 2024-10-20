@@ -17,6 +17,12 @@ const getCurrentTheme = () => {
   return "light";
 };
 
+const themedImage = () => {
+  return getCurrentTheme() === "dark"
+    ? "/phone-template-dark-edges.png"
+    : "/phone-template-white-edges.png";
+};
+
 const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
   const [theme, setTheme] = useState("light");
   useEffect(() => {
@@ -24,7 +30,7 @@ const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
     if (theme !== currentTheme) {
       setTheme(currentTheme);
     }
-  }, []);
+  }, [theme]);
   return (
     <div
       className={cn(
@@ -34,11 +40,7 @@ const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
       {...props}
     >
       <Image
-        src={
-          theme === "dark"
-            ? "/phone-template-dark-edges.png"
-            : "/phone-template-white-edges.png"
-        }
+        src={themedImage()}
         alt="background of phone"
         className="pointer-events-none z-10 select-none"
         width={400}
