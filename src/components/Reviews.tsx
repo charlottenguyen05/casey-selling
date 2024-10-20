@@ -6,6 +6,7 @@ import { useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Phone from "./Phone";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const PHONES = [
   "/testimonials/1.jpg",
@@ -42,6 +43,15 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
       Math.floor(Math.random() * POSSIBLE_ANIMATION_DELAYS.length)
     ];
 
+  function ThemedImage() {
+    const { resolvedTheme } = useTheme();
+    return resolvedTheme === "dark" ? (
+      <Phone imgSrc={imgSrc} phoneImgSrc="/phone-template-dark-edges.png" />
+    ) : (
+      <Phone imgSrc={imgSrc} phoneImgSrc="/phone-template-white-edges.png" />
+    );
+  }
+
   return (
     <div
       className={cn(
@@ -51,7 +61,7 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
       style={{ animationDelay }}
       {...props}
     >
-      <Phone imgSrc={imgSrc} />
+      {ThemedImage()}
     </div>
   );
 }

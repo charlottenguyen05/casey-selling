@@ -32,7 +32,7 @@ const PhonePreview = ({
   }, [ref.current]);
 
   return (
-    <AspectRatio ref={ref} ratio={3000 / 2001} className="relativ">
+    <AspectRatio ref={ref} ratio={3000 / 2001} className="relative">
       <div
         className="absolute z-20 scale-[1.0352]"
         style={{

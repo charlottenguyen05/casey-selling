@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import LoginModal from "@/components/LoginModal";
+import { useTheme } from "next-themes";
 
 const Highlights = [
   "Wireless charging compatible",
@@ -26,12 +27,16 @@ const Materials = [
   "Scratch and fingerprint resistant coating",
 ];
 
+
+
+
 const DesignPreview = ({
   configuration, user
 }: {
   configuration: Configuration,
   user: KindeUser<Record<string, any>>,
 }) => {
+  
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
   
@@ -54,6 +59,21 @@ const DesignPreview = ({
   }
   if (finish === "textured") {
     totalPrice += PRODUCT_PRICES.finish.textured;
+  }
+
+  function ThemedImage() {
+    const { resolvedTheme } = useTheme();
+    return resolvedTheme === "dark" ? (
+      <Phone imgSrc={croppedImgUrl!}
+      className={cn(
+        "pointer-events-none z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]",
+        `bg-${color}-950`)} phoneImgSrc="/phone-template-dark-edges.png" />
+    ) : (
+      <Phone imgSrc={croppedImgUrl!}
+      className={cn(
+        "pointer-events-none z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]",
+        `bg-${color}-950`)} phoneImgSrc="/phone-template-white-edges.png" />
+    );
   }
 
   const { mutate: createPaymentSession } = useMutation({
@@ -86,6 +106,7 @@ const DesignPreview = ({
     }
   }
 
+
   return (
     <>
       <Confetti
@@ -95,13 +116,7 @@ const DesignPreview = ({
       <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <section className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-14 my-20">
         <div className="phone-section flex justify-center items-center md:justify-start">
-          <Phone
-            imgSrc={croppedImgUrl!}
-            className={cn(
-              "pointer-events-none z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]",
-              `bg-${color}-950`
-            )}
-          />
+          {ThemedImage()}
         </div>
 
         {/* Right handside section */}

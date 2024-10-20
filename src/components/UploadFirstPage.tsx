@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import Image from "next/image";
@@ -5,6 +6,7 @@ import Phone from "@/components/Phone";
 import Guarentee from "./Guarentee";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 const guarenteesEnd = [
   "High-quality silicone material",
@@ -12,6 +14,15 @@ const guarenteesEnd = [
   "Wireless charging compatible",
   "5 year print warranty",
 ];
+
+function ThemedImage() {
+  const { resolvedTheme } = useTheme();
+  return resolvedTheme === "dark" ? (
+    <Phone imgSrc="/horse_phone.jpg" className="w-60 overflow-hidden" phoneImgSrc="/phone-template-dark-edges.png" />
+  ) : (
+    <Phone imgSrc="/horse_phone.jpg" className="w-60 overflow-hidden" phoneImgSrc="/phone-template-white-edges.png" />
+  );
+}
 
 const UploadFirstPage = () => {
   return (
@@ -39,7 +50,7 @@ const UploadFirstPage = () => {
             height={140}
             className="rotate-90 md:rotate-0 mt-16 mb-16"
           />
-          <Phone imgSrc="/horse_phone.jpg" className="w-60 overflow-hidden" />
+          {ThemedImage()}
         </div>
         <div className="mx-auto max-w-prose sm:text-lg space-y-2 w-fit">
           {guarenteesEnd.map((g, id) => (

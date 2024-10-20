@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import FiveStar from "@/components/FiveStar";
@@ -10,6 +11,23 @@ const Guarentees = [
   "5 year print guarantee",
   "Modern iPhone models supported",
 ];
+
+function ThemedImage() {
+  const { resolvedTheme } = useTheme();
+  return resolvedTheme === "dark" ? (
+    <Phone
+      className="w-64"
+      imgSrc="/testimonials/1.jpg"
+      phoneImgSrc="/phone-template-dark-edges.png"
+    />
+  ) : (
+    <Phone
+      className="w-64"
+      imgSrc="/testimonials/1.jpg"
+      phoneImgSrc="/phone-template-white-edges.png"
+    />
+  );
+}
 
 const Hero = () => {
   return (
@@ -45,7 +63,7 @@ const Hero = () => {
 
             {/* 3 guarantees */}
             <ul className="mt-8 space-y-2 text-left font-medium flex flex-col sm:items-start">
-              {Guarentees.map((g,id) => (
+              {Guarentees.map((g, id) => (
                 <Guarentee text={g} key={id} />
               ))}
             </ul>
@@ -116,7 +134,7 @@ const Hero = () => {
               className="absolute w-20 -left-6 -bottom-6 select-none"
               alt="dotted line"
             />
-            <Phone className="w-64" imgSrc="/testimonials/1.jpg" />
+            {ThemedImage()}
           </div>
         </div>
       </MaxWidthWrapper>

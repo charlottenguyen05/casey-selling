@@ -1,30 +1,14 @@
-"use client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useState, useEffect, HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 
 interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
   imgSrc: string;
-  dark?: boolean;
+  phoneImgSrc: string;
 }
 
-const getCurrentTheme = () => {
-  if (typeof window !== "undefined") {
-    return document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
-  }
-  return "light";
-};
 
-const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
-  const [theme, setTheme] = useState("light");
-  useEffect(() => {
-    const currentTheme = getCurrentTheme();
-    if (theme !== currentTheme) {
-      setTheme(currentTheme);
-    }
-  }, []);
+const Phone = ({ imgSrc, className, phoneImgSrc, ...props }: PhoneProps) => {
   return (
     <div
       className={cn(
@@ -34,11 +18,7 @@ const Phone = ({ imgSrc, className, ...props }: PhoneProps) => {
       {...props}
     >
       <Image
-        src={
-          theme === "dark"
-            ? "/phone-template-dark-edges.png"
-            : "/phone-template-white-edges.png"
-        }
+        src={phoneImgSrc}
         alt="background of phone"
         className="pointer-events-none z-10 select-none"
         width={400}

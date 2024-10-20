@@ -146,7 +146,6 @@ const DesignConfig = ({
           configId: configId,
         });
         console.log("Upload successful image to uploadthing");
-        // setEndImageUploaded(true);
       }
     } catch (err) {
       toast({
