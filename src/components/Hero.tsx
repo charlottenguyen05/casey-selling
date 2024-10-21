@@ -3,31 +3,13 @@ import Image from "next/image";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import FiveStar from "@/components/FiveStar";
 import Guarentee from "@/components/Guarentee";
-import Phone from "@/components/Phone";
-import { useTheme } from "next-themes";
+import { ThemedImage } from "./ThemedImage";
 
 const Guarentees = [
   "High-quality, durable material",
   "5 year print guarantee",
   "Modern iPhone models supported",
 ];
-
-function ThemedImage() {
-  const { resolvedTheme } = useTheme();
-  return resolvedTheme === "dark" ? (
-    <Phone
-      className="w-64"
-      imgSrc="/testimonials/1.jpg"
-      phoneImgSrc="/phone-template-dark-edges.png"
-    />
-  ) : (
-    <Phone
-      className="w-64"
-      imgSrc="/testimonials/1.jpg"
-      phoneImgSrc="/phone-template-white-edges.png"
-    />
-  );
-}
 
 const Hero = () => {
   return (
@@ -134,7 +116,7 @@ const Hero = () => {
               className="absolute w-20 -left-6 -bottom-6 select-none"
               alt="dotted line"
             />
-            {ThemedImage()}
+            {ThemedImage("/testimonials/1.jpg", "w-64")}
           </div>
         </div>
       </MaxWidthWrapper>

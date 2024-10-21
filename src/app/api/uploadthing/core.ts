@@ -1,6 +1,5 @@
 
 import { createUploadthing, type FileRouter } from "uploadthing/next";  // Import the 
-import { UploadThingError } from "uploadthing/server";  // Error handling for uploadthing
 import { z } from "zod"  // Use for input validation
 import sharp from "sharp"  // Use for image processing
 import { db } from "@/db";

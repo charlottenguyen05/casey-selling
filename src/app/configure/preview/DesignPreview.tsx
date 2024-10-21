@@ -1,7 +1,6 @@
 "use client";
-import Phone from "@/components/Phone";
 import { Check } from "lucide-react";
-import { cn, formatPrice } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/product";
 import Confetti from "react-dom-confetti";
 import { useState, useEffect } from "react";
@@ -13,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Configuration } from "@prisma/client";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import LoginModal from "@/components/LoginModal";
-import { useTheme } from "next-themes";
+import { ThemedImage } from "@/components/ThemedImage";
 
 const Highlights = [
   "Wireless charging compatible",
@@ -27,22 +26,19 @@ const Materials = [
   "Scratch and fingerprint resistant coating",
 ];
 
-
-
-
 const DesignPreview = ({
-  configuration, user
+  configuration,
+  user,
 }: {
-  configuration: Configuration,
-  user: KindeUser<Record<string, any>>,
+  configuration: Configuration;
+  user: KindeUser<Record<string, any>>;
 }) => {
-  
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true), []);
-  
+
   const router = useRouter();
   const { toast } = useToast();
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
   const {
     material,
@@ -59,21 +55,6 @@ const DesignPreview = ({
   }
   if (finish === "textured") {
     totalPrice += PRODUCT_PRICES.finish.textured;
-  }
-
-  function ThemedImage() {
-    const { resolvedTheme } = useTheme();
-    return resolvedTheme === "dark" ? (
-      <Phone imgSrc={croppedImgUrl!}
-      className={cn(
-        "pointer-events-none z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]",
-        `bg-${color}-950`)} phoneImgSrc="/phone-template-dark-edges.png" />
-    ) : (
-      <Phone imgSrc={croppedImgUrl!}
-      className={cn(
-        "pointer-events-none z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]",
-        `bg-${color}-950`)} phoneImgSrc="/phone-template-white-edges.png" />
-    );
   }
 
   const { mutate: createPaymentSession } = useMutation({
@@ -98,14 +79,13 @@ const DesignPreview = ({
   const handleCheckout = () => {
     if (user) {
       // create payment session
-      createPaymentSession({ configId: configId, user })
+      createPaymentSession({ configId: configId, user });
     } else {
       // need to log in
-      localStorage.setItem('configurationId', configId)
-      setIsLoginModalOpen(true)
+      localStorage.setItem("configurationId", configId);
+      setIsLoginModalOpen(true);
     }
-  }
-
+  };
 
   return (
     <>
@@ -116,7 +96,10 @@ const DesignPreview = ({
       <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
       <section className="flex flex-col md:flex-row gap-8 md:gap-10 lg:gap-14 my-20">
         <div className="phone-section flex justify-center items-center md:justify-start">
-          {ThemedImage()}
+          {ThemedImage(
+            croppedImgUrl!,
+            "z-40 flex flex-auto max-w-[180px] md:max-w-[270px] lg:max-w-[330px]"
+          )}
         </div>
 
         {/* Right handside section */}
@@ -134,7 +117,9 @@ const DesignPreview = ({
           {/* Highlights & Materials Section */}
           <div className="flex flex-col sm:flex-row my-3 gap-8 lg:gap-20 max-sm:items-center max-sm:justify-center">
             <div className="dark:text-white">
-              <p className="font-medium text-zinc-950 dark:text-white">Highlights</p>
+              <p className="font-medium text-zinc-950 dark:text-white">
+                Highlights
+              </p>
               <ul className="mt-2 text-zinc-700 dark:text-white list-disc list-inside">
                 {Highlights.map((highlight, i) => (
                   <li key={i}>{highlight}</li>
@@ -142,7 +127,9 @@ const DesignPreview = ({
               </ul>
             </div>
             <div>
-              <p className="font-medium text-zinc-950 dark:text-white">Materials</p>
+              <p className="font-medium text-zinc-950 dark:text-white">
+                Materials
+              </p>
               <ul className="mt-2 text-zinc-700 dark:text-white list-disc list-inside">
                 {Materials.map((material, i) => (
                   <li key={i}>{material}</li>
@@ -187,7 +174,9 @@ const DesignPreview = ({
               </div>
               <hr className="col-span-2 my-4" />
               <div className="flex justify-between col-span-2">
-                <p className="text-gray-600 font-semibold dark:text-white">Total</p>
+                <p className="text-gray-600 font-semibold dark:text-white">
+                  Total
+                </p>
                 <p className="font-semibold text-gray-900 dark:text-white">
                   {formatPrice(totalPrice / 100)}
                 </p>

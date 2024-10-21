@@ -2,7 +2,6 @@
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/product"
 import { db } from "@/db"
 import { stripe } from "@/lib/stripe"
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { Order } from "@prisma/client"
 
