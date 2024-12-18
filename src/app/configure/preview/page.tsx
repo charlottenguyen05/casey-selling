@@ -33,7 +33,6 @@ const Page = async ({ searchParams }: PageProps) => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-
   const configuration = await db.configuration.findUnique({
     where: { id },
   });
@@ -42,7 +41,7 @@ const Page = async ({ searchParams }: PageProps) => {
     return notFound();
   }
 
-  return <DesignPreview configuration={configuration} user={user}/>;
+  return <DesignPreview configuration={configuration} user={user} />;
 };
 
 export default Page;

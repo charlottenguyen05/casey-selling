@@ -4,13 +4,12 @@ import { buttonVariants } from "./ui/button";
 import {
   RegisterLink,
   LoginLink,
-  LogoutLink
+  LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import ThemeToggle from "./ThemeToggle";
 
 const NavBar = async () => {
-
   const { getUser } = getKindeServerSession();
   let user = await getUser();
   console.log("/NavBar.tsx: getKindeServerSession(): ", user);
@@ -23,7 +22,7 @@ const NavBar = async () => {
           casey <span className="text-green-600">selling</span>
         </Link>
         <div className="flex gap-4 items-center text-xs font-semibold">
-          <ThemeToggle/>
+          <ThemeToggle />
           {user ? (
             <>
               <LogoutLink
@@ -31,7 +30,8 @@ const NavBar = async () => {
                 className={buttonVariants({
                   size: "sm",
                   variant: "ghost",
-                  className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                  className:
+                    "text-xs dark:bg-transparent dark:hover:bg-slate-700",
                 })}
               >
                 Sign out
@@ -42,7 +42,8 @@ const NavBar = async () => {
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
-                    className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                    className:
+                      "text-xs dark:bg-transparent dark:hover:bg-slate-700",
                   })}
                 >
                   Dashboard ✨
@@ -52,7 +53,8 @@ const NavBar = async () => {
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden dark:text-white dark:hover:bg-slate-700 sm:flex items-center gap-1 text-xs dark:bg-transparent",
+                    className:
+                      "hidden dark:text-white dark:hover:bg-slate-700 sm:flex items-center gap-1 text-xs dark:bg-transparent",
                   })}
                 >
                   Create case <span className="font-bold ml-2">&#10148;</span>
@@ -66,7 +68,8 @@ const NavBar = async () => {
                 className={buttonVariants({
                   size: "sm",
                   variant: "ghost",
-                  className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                  className:
+                    "text-xs dark:bg-transparent dark:hover:bg-slate-700",
                 })}
               >
                 Sign up
@@ -76,7 +79,8 @@ const NavBar = async () => {
                 className={buttonVariants({
                   size: "sm",
                   variant: "ghost",
-                  className: "text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                  className:
+                    "text-xs dark:bg-transparent dark:hover:bg-slate-700",
                 })}
               >
                 Login
@@ -86,7 +90,8 @@ const NavBar = async () => {
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden dark:text-white sm:flex items-center gap-1 text-xs dark:bg-transparent dark:hover:bg-slate-700",
+                    className:
+                      "hidden dark:text-white sm:flex items-center gap-1 text-xs dark:bg-transparent dark:hover:bg-slate-700",
                   })}
                 >
                   Create case <span className="font-bold ml-2">&#10148;</span>

@@ -7,7 +7,6 @@ interface PhoneProps extends HTMLAttributes<HTMLDivElement> {
   phoneImgSrc: string;
 }
 
-
 const Phone = ({ imgSrc, className, phoneImgSrc, ...props }: PhoneProps) => {
   return (
     <div

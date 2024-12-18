@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     if (!process.env.STRIPE_WEBHOOK_SECRET) {
       return new Response('Missing webhook secret', { status: 400 })
     }
-    
+
     const event = stripe.webhooks.constructEvent(
       body,
       signature,
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
               country: shippingAddress!.country!,
               postalCode: shippingAddress!.postal_code!,
               street: shippingAddress!.line1!,
-         
+
             },
           },
           billingAddress: {
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
               country: billingAddress!.country!,
               postalCode: billingAddress!.postal_code!,
               street: billingAddress!.line1!,
-          
+
             },
           },
         },
@@ -81,18 +81,18 @@ export async function POST(req: Request) {
         to: [event.data.object.customer_details.email],
         subject: "Thanks for your order!",
         react: Email({
-            orderId,
-            orderDate: updatedOrder.createdAt.toLocaleDateString(),
-            // @ts-ignore
-            shippingAddress: {
-                name: session.customer_details!.name!,
-                city: shippingAddress!.city!,
-                country: shippingAddress!.country!,
-                postalCode: shippingAddress!.postal_code!,
-                street: shippingAddress!.line1!,
-            }
-            })
+          orderId,
+          orderDate: updatedOrder.createdAt.toLocaleDateString(),
+          // @ts-ignore
+          shippingAddress: {
+            name: session.customer_details!.name!,
+            city: shippingAddress!.city!,
+            country: shippingAddress!.country!,
+            postalCode: shippingAddress!.postal_code!,
+            street: shippingAddress!.line1!,
+          }
         })
+      })
     }
 
     return NextResponse.json({ result: event, ok: true })

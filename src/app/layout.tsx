@@ -20,12 +20,12 @@ export default function RootLayout({
     <html suppressHydrationWarning>
       <body className={recursive.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NavBar/>
+          <NavBar />
           <main className="flex flex-col min-h-[calc(100vh-3.5rem-1px)] grainy-light">
             <div className="flex-1 flex flex-col h-full">
               <ReactQueryProviders>{children}</ReactQueryProviders>
             </div>
-            <Footer/>
+            <Footer />
           </main>
         </ThemeProvider>
         <Toaster />

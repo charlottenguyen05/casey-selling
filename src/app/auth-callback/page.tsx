@@ -22,7 +22,7 @@ const Page = () => {
     retry: 5,
     retryDelay: 500,
   });
-  console.log(data)
+  console.log(data);
 
   if (data?.success) {
     if (configId) {
