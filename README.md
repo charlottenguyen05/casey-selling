@@ -76,7 +76,6 @@ You should now have the project running locally on your machine.
 
 ### **Server**
 - 🔧 **Next.js**
-- 🔤 **TypeScript**
 - 📋 **Prisma**
 - ☁️ **Neon (cloud database)**
 - 💳 **Stripe**
