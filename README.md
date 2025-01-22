@@ -1,4 +1,4 @@
-# Casey-Selling: Customized Case E-commerce Project
+# Casey-Selling: Personalized Case E-commerce Platform
 
 This project is a dynamic e-commerce platform designed for a shop specializing in bespoke phone cases. Customers can unleash their creativity by designing personalized cases, styling images, and selecting from an extensive array of premium materials and unique styles. It also comms with a management table for shop's owner to keep track of the orders and sales.
 
