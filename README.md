@@ -9,12 +9,12 @@ This project is a dynamic e-commerce platform designed for a shop specializing i
 
 ## 📚 Table of Contents
 
-- [Installation](#installation)
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Acknowledgement](#acknowledgement)
-- [License](#license)
+- [Installation](##installation)
+- [Tech Stack](##tech-stack)
+- [Features](##features)
+- [Project Structure](##project-structure)
+- [Acknowledgement](##acknowledgement)
+- [License](##license)
 
 ---
 
