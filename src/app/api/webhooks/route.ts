@@ -5,10 +5,6 @@ import { stripe } from '@/lib/stripe'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { Resend } from 'resend'
-import Email from '@/components/emails/Email'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
   try {
@@ -74,24 +70,6 @@ export async function POST(req: Request) {
             },
           },
         },
-      })
-
-      await resend.emails.send({
-        from: "Casey Selling <nhinguyenngoclinh2005@gmail.com>",
-        to: [event.data.object.customer_details.email],
-        subject: "Thanks for your order!",
-        react: Email({
-          orderId,
-          orderDate: updatedOrder.createdAt.toLocaleDateString(),
-          // @ts-ignore
-          shippingAddress: {
-            name: session.customer_details!.name!,
-            city: shippingAddress!.city!,
-            country: shippingAddress!.country!,
-            postalCode: shippingAddress!.postal_code!,
-            street: shippingAddress!.line1!,
-          }
-        })
       })
     }
 

@@ -85,8 +85,7 @@ const Page = async () => {
                   <CardTitle className="text-4xl">
                     {lastWeekSum._sum.totalPrice === null
                       ? (lastWeekSum._sum.totalPrice = 0)
-                      : lastWeekSum._sum.totalPrice}
-                    {formatPrice(lastWeekSum._sum.totalPrice)}
+                      : formatPrice(lastWeekSum._sum.totalPrice)}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -106,8 +105,7 @@ const Page = async () => {
                   <CardTitle className="text-4xl">
                     {lastMonthSum._sum.totalPrice === null
                       ? (lastMonthSum._sum.totalPrice = 0)
-                      : lastMonthSum._sum.totalPrice}
-                    {formatPrice(lastMonthSum._sum.totalPrice)}
+                      : formatPrice(lastMonthSum._sum.totalPrice)}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
